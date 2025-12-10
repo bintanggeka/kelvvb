@@ -1,0 +1,118 @@
+{
+  "project_specification": {
+    "meta_info": {
+      "app_name": "SmartSaver AI",
+      "version": "1.0.0-MVP",
+      "platform": "Web Application (Responsive)",
+      "core_philosophy": "Personal Finance Assistant yang proaktif, bukan sekadar mencatat."
+    },
+    "technical_architecture": {
+      "frontend_framework": "React JS (Vite Build Tool)",
+      "language": "JavaScript (ES6+) / TypeScript",
+      "styling_strategy": {
+        "methodology": "CSS Modules (*.module.css)",
+        "reasoning": "Menghindari konflik class global, modularitas tinggi tanpa utility-first library seperti Tailwind.",
+        "preprocessor": "SASS/SCSS (Opsional, untuk nesting capability)"
+      },
+      "ai_engine": {
+        "provider": "Google Gemini API",
+        "model": "gemini-1.5-flash (Optimized for speed & cost)",
+        "integration_method": "Direct Client-side SDK (@google/generative-ai)"
+      },
+      "state_management": "React Context API (Global State) + Custom Hooks",
+      "storage": "LocalStorage (Persistensi data di browser user)"
+    },
+    "user_experience_flow": {
+      "onboarding": "User masuk -> Input Nama & Gaji Bulanan -> Masuk Dashboard.",
+      "daily_usage": "User input pengeluaran -> AI otomatis menyarankan kategori -> Saldo terupdate.",
+      "weekly_review": "User menekan tombol 'Audit Keuangan' -> Gemini membaca data -> Menampilkan saran penghematan."
+    },
+    "feature_breakdown": {
+      "1_core_system": {
+        "transaction_engine": {
+          "description": "Sistem CRUD (Create, Read, Update, Delete) untuk arus kas.",
+          "requirements": [
+            "Validasi input (tidak boleh negatif, tanggal wajib diisi).",
+            "Pemisahan visual jelas antara Pemasukan (Hijau) dan Pengeluaran (Merah).",
+            "Kalkulasi saldo realtime (Pemasukan - Pengeluaran)."
+          ]
+        },
+        "budgeting_goals": {
+          "description": "Fitur penetapan target tabungan.",
+          "logic": "User set target (misal: Rp 5.000.000). Sistem menghitung gap (Kekurangan) dan estimasi waktu tercapai berdasarkan rata-rata tabungan harian."
+        }
+      },
+      "2_ai_integration_deep_dive": {
+        "feature_a_smart_categorizer": {
+          "trigger": "Saat user mengetik di kolom 'Keterangan' dan onBlur (lepas fokus).",
+          "process": "Kirim teks keterangan ke Gemini.",
+          "prompt_logic": "Analisa teks ini: '{userInput}'. Kategorikan ke dalam satu dari: [Makanan, Transport, Tagihan, Hiburan, Belanja, Kesehatan, Lainnya]. Jawab hanya satu kata kategorya.",
+          "ui_effect": "Dropdown kategori otomatis terisi tanpa user memilih manual."
+        },
+        "feature_b_financial_auditor": {
+          "trigger": "Tombol 'Minta Saran AI' di Dashboard.",
+          "process": "Mengambil 50 transaksi terakhir dari State -> Konversi ke JSON String -> Kirim ke Gemini.",
+          "prompt_logic": "Bertindaklah sebagai akuntan pribadi yang tegas namun solutif. Berikut data keuanganku: {transactionJson}. Gaji bulananku: {monthlySalary}. 1. Analisa kemana uangku paling banyak habis. 2. Berikan 3 langkah konkret penghematan. 3. Beri skor kesehatan finansial (0-100). Format jawaban dalam Markdown.",
+          "ui_effect": "Modal popup menampilkan loading state, lalu merender hasil analisis dalam format Markdown yang rapi."
+        },
+        "feature_c_expense_predictor": {
+          "trigger": "Ditampilkan di Dashboard bagian atas.",
+          "process": "AI memprediksi apakah saldo cukup sampai akhir bulan.",
+          "prompt_logic": "Berdasarkan pengeluaran rata-rata harian dari data ini {data}, apakah sisa saldoku {currentBalance} cukup untuk {daysLeft} hari ke depan? Jawab Singkat: 'Aman' atau 'Bahaya', diikuti satu kalimat alasannya."
+        }
+      }
+    },
+    "ui_design_system_spec": {
+      "color_palette": {
+        "primary": "#4F46E5 (Indigo - Fokus & Kepercayaan)",
+        "success": "#10B981 (Emerald - Pemasukan/Aman)",
+        "danger": "#EF4444 (Red - Pengeluaran/Bahaya)",
+        "ai_special": "Linear Gradient (#8E2DE2 to #4A00E0) - Khusus elemen AI",
+        "background": "#F3F4F6 (Light Gray - Bersih)",
+        "surface": "#FFFFFF (White - Kartu & Kontainer)"
+      },
+      "typography": {
+        "font_family": "'Inter' atau 'Roboto', sans-serif",
+        "hierarchy": {
+          "h1": "Dashboard Title",
+          "h2": "Section Headers",
+          "body": "Transaction details",
+          "caption": "Dates & meta info"
+        }
+      },
+      "component_library_requirements": {
+        "Card": "Container dengan border-radius 12px, box-shadow halus, padding 20px.",
+        "Button": "Solid color, hover effect (opacity 0.9), transition 0.2s ease.",
+        "Input": "Border 1px solid #E5E7EB, focus ring color primary.",
+        "Badge": "Label kecil bulat untuk kategori (misal: Makanan = Badge Kuning)."
+      }
+    },
+    "data_structure_schema": {
+      "Transaction": {
+        "id": "uuid (string)",
+        "date": "ISO 8601 Date String",
+        "description": "string (e.g., 'Nasi Padang')",
+        "amount": "number (positive integer)",
+        "type": "enum ['INCOME', 'EXPENSE']",
+        "category": "string (Auto-filled by AI or Manual)"
+      },
+      "UserProfile": {
+        "name": "string",
+        "monthlyIncome": "number",
+        "savingsGoal": "number",
+        "currentBalance": "number (Computed)"
+      },
+      "AI_Log": {
+        "lastAuditDate": "timestamp",
+        "cachedAdvice": "string (markdown)"
+      }
+    },
+    "development_phases": {
+      "phase_1_foundation": "Setup React, CSS Variables untuk warna, Pembuatan Komponen UI dasar (Button, Card, Input).",
+      "phase_2_logic": "Setup Context API, Fungsi Add/Delete Transaksi, Persistensi LocalStorage.",
+      "phase_3_ai_setup": "Dapatkan API Key Gemini, Buat file service 'GeminiService.js' untuk handle request/response.",
+      "phase_4_integration": "Sambungkan Form Input dengan AI Categorizer. Sambungkan Dashboard dengan AI Auditor.",
+      "phase_5_polishing": "Loading states (Skeleton UI), Error handling jika API Gemini gagal/limit habis, Responsive layout fix."
+    }
+  }
+}

@@ -1,0 +1,72 @@
+ .appShell {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 32px 20px 60px;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 28px;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.brandMark {
+  width: 42px;
+  height: 42px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, var(--color-ai-from), var(--color-ai-to));
+  display: grid;
+  place-items: center;
+  color: #fff;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  box-shadow: 0 14px 30px rgba(78, 46, 224, 0.28);
+}
+
+.title {
+  margin: 0;
+  font-size: 24px;
+}
+
+.subtitle {
+  margin: 0;
+  color: var(--color-muted);
+  font-size: 14px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: 16px;
+}
+
+.sectionColumn {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.transactionsWrapper {
+  display: grid;
+  grid-template-rows: auto 1fr;
+  gap: 12px;
+}
+
+@media (max-width: 960px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+
+
+
+

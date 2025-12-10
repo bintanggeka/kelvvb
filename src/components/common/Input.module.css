@@ -1,0 +1,50 @@
+ .wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  width: 100%;
+}
+
+.label {
+  font-weight: 700;
+  font-size: 14px;
+}
+
+.inputBox {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.input {
+  width: 100%;
+  padding: 12px 12px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--color-stroke);
+  font-size: 14px;
+  outline: none;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.input:focus {
+  border-color: rgba(232, 109, 74, 0.6);
+  box-shadow: 0 0 0 3px rgba(232, 109, 74, 0.18);
+}
+
+.rightSlot {
+  position: absolute;
+  right: 10px;
+  color: var(--color-muted);
+  font-size: 13px;
+}
+
+.hint {
+  color: var(--color-muted);
+  font-size: 12px;
+}
+
+.error {
+  color: var(--color-danger);
+  font-size: 12px;
+}
+

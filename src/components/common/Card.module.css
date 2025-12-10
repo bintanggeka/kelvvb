@@ -1,0 +1,37 @@
+.card {
+  background: var(--color-surface);
+  border-radius: var(--radius-lg);
+  padding: 22px;
+  box-shadow: var(--shadow-soft);
+  border: 1px solid var(--color-stroke);
+}
+
+.cardHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+
+.title {
+  margin: 0;
+  font-size: 17px;
+  letter-spacing: -0.01em;
+}
+
+@media (max-width: 640px) {
+  .card {
+    padding: 16px;
+    border-radius: var(--radius-md);
+  }
+
+  .cardHeader {
+    gap: 8px;
+    margin-bottom: 12px;
+  }
+
+  .title {
+    font-size: 15px;
+  }
+}

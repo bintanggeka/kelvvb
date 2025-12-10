@@ -1,0 +1,30 @@
+.note {
+  margin: 0 0 10px;
+  color: #374151;
+}
+
+.status {
+  margin: 0;
+  color: var(--color-primary-strong);
+  font-weight: 700;
+}
+
+.error {
+  color: var(--color-danger);
+  font-weight: 700;
+}
+
+.markdown {
+  line-height: 1.6;
+}
+
+.markdown h1,
+.markdown h2,
+.markdown h3 {
+  margin-top: 12px;
+}
+
+.markdown ul {
+  padding-left: 20px;
+}
+
