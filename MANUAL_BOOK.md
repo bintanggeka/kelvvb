@@ -49,40 +49,45 @@
 ### Prasyarat
 
 Pastikan Anda telah menginstall:
+
 - **Node.js** (versi 16 atau lebih baru)
 - **npm** atau **yarn** (package manager)
 
 ### Langkah Instalasi
 
 1. **Clone atau download project**
+
    ```bash
    git clone https://github.com/bintanggeka/tugassistemcerdas.git
    cd tugassistemcerdas/bunuraini-master
    ```
 
 2. **Install dependencies**
+
    ```bash
    npm install
    ```
 
 3. **Setup environment variables**
-   
+
    Buat file `.env` di root project dengan isi:
+
    ```env
    VITE_OPENROUTER_API_KEY=your_api_key_here
    # atau untuk multiple keys (pisahkan dengan koma):
    VITE_OPENROUTER_API_KEYS=key1,key2,key3
    ```
-   
+
    > **Catatan**: Dapatkan API key gratis di [OpenRouter.ai](https://openrouter.ai/)
 
 4. **Jalankan development server**
+
    ```bash
    npm run dev
    ```
 
 5. **Buka browser**
-   
+
    Aplikasi akan berjalan di `http://localhost:5173` (atau port yang ditampilkan di terminal)
 
 ### Build untuk Production
@@ -103,9 +108,9 @@ npm run preview
 
 ### Environment Variables
 
-| Variable | Deskripsi | Contoh |
-|----------|-----------|--------|
-| `VITE_OPENROUTER_API_KEY` | Single API key untuk OpenRouter | `sk-or-v1-...` |
+| Variable                   | Deskripsi                                | Contoh           |
+| -------------------------- | ---------------------------------------- | ---------------- |
+| `VITE_OPENROUTER_API_KEY`  | Single API key untuk OpenRouter          | `sk-or-v1-...`   |
 | `VITE_OPENROUTER_API_KEYS` | Multiple API keys (pisahkan dengan koma) | `key1,key2,key3` |
 
 ### Model AI yang Digunakan
@@ -163,6 +168,7 @@ bunuraini-master/
 ### 1. Dashboard Statistik
 
 Menampilkan ringkasan keuangan:
+
 - **Saldo Saat Ini**: Pemasukan dikurangi pengeluaran
 - **Total Pemasukan**: Jumlah semua transaksi pemasukan
 - **Total Pengeluaran**: Jumlah semua transaksi pengeluaran
@@ -178,11 +184,13 @@ Menampilkan ringkasan keuangan:
 ### 3. AI-Powered Features
 
 #### a. Parsing Nominal (parseAmount)
+
 - Mengkonversi teks natural language menjadi nominal uang
 - Contoh input: "15k", "15000", "lima belas ribu", "15rb"
 - Output: `{ amount: 15000, category: "Makanan" }`
 
 #### b. Kategorisasi (categorize)
+
 - Mengkategorikan transaksi ke dalam:
   - Makanan
   - Transport
@@ -193,6 +201,7 @@ Menampilkan ringkasan keuangan:
   - Lainnya
 
 #### c. Audit Keuangan (audit)
+
 - Menganalisis 50 transaksi terakhir
 - Memberikan:
   - Ringkasan pengeluaran per kategori
@@ -200,11 +209,13 @@ Menampilkan ringkasan keuangan:
   - Skor kesehatan finansial (0-100)
 
 #### d. Prediksi Pengeluaran (predict)
+
 - Memprediksi apakah saldo cukup untuk sisa hari di bulan
 - Memberikan verdict: "Aman" atau "Bahaya"
 - Alasan singkat untuk prediksi
 
 #### e. Perencanaan 7 Hari (plan)
+
 - Membuat rencana keuangan untuk 7 hari ke depan
 - Termasuk:
   - Fokus minggu ini
@@ -229,6 +240,7 @@ Menampilkan target tabungan berdasarkan profil pengguna.
 ### 1. Onboarding Pertama Kali
 
 Saat pertama kali membuka aplikasi, Anda akan diminta untuk:
+
 1. **Masukkan Nama**: Nama Anda untuk personalisasi
 2. **Masukkan Gaji Bulanan**: Gaji bulanan untuk perhitungan budget
 
@@ -240,7 +252,7 @@ Klik "Simpan Profil" untuk melanjutkan.
 2. **Pilih Tanggal**: Gunakan date picker
 3. **Pilih Tipe**: Pemasukan atau Pengeluaran
 4. **Masukkan Keterangan**: Deskripsi transaksi (contoh: "Nasi Padang siang")
-5. **Masukkan Jumlah**: 
+5. **Masukkan Jumlah**:
    - Anda bisa mengetik dalam format natural language
    - Contoh: "15k", "15000", "15rb", atau "lima belas ribu"
    - AI akan otomatis mendeteksi nominal dan kategori
@@ -330,11 +342,13 @@ SmartSaverDB (version 1)
 ### AI Integration Flow
 
 1. **API Key Management**
+
    - Mendukung multiple API keys dengan rotasi otomatis
    - Fallback ke key berikutnya jika kuota habis
    - Cooldown 60 detik saat rate limit
 
 2. **Model Selection**
+
    - Mencoba model secara berurutan
    - Cache model yang berhasil
    - Fallback ke offline mode jika semua gagal
@@ -367,11 +381,13 @@ App (Root)
 ### Masalah: AI tidak berfungsi
 
 **Kemungkinan penyebab:**
+
 1. API key tidak terkonfigurasi
 2. API key tidak valid atau expired
 3. Kuota API habis
 
 **Solusi:**
+
 1. Pastikan file `.env` ada dan berisi API key yang valid
 2. Cek di browser console untuk error message
 3. Tunggu 1 menit jika ada cooldown
@@ -380,11 +396,13 @@ App (Root)
 ### Masalah: Data tidak tersimpan
 
 **Kemungkinan penyebab:**
+
 1. IndexedDB tidak didukung di browser
 2. Storage quota penuh
 3. Browser dalam mode private/incognito
 
 **Solusi:**
+
 1. Gunakan browser modern (Chrome, Firefox, Edge)
 2. Hapus data browser lama
 3. Keluar dari mode incognito
@@ -392,11 +410,13 @@ App (Root)
 ### Masalah: Build error
 
 **Kemungkinan penyebab:**
+
 1. Dependencies tidak terinstall
 2. Node.js version tidak kompatibel
 3. Port sudah digunakan
 
 **Solusi:**
+
 ```bash
 # Hapus node_modules dan install ulang
 rm -rf node_modules package-lock.json
@@ -409,6 +429,7 @@ npm run dev -- --port 3000
 ### Masalah: Styling tidak muncul
 
 **Solusi:**
+
 1. Pastikan CSS Modules terkonfigurasi dengan benar
 2. Clear browser cache
 3. Restart development server
@@ -420,10 +441,12 @@ npm run dev -- --port 3000
 ### Menambah Fitur Baru
 
 1. **Tambah Komponen Baru**
+
    - Buat file di `src/components/`
    - Import dan gunakan di `App.jsx`
 
 2. **Tambah Hook Baru**
+
    - Buat file di `src/hooks/`
    - Export function yang bisa digunakan di komponen
 
@@ -446,6 +469,7 @@ npm run dev -- --port 3000
 ### Testing
 
 Untuk menambahkan testing:
+
 ```bash
 npm install --save-dev vitest @testing-library/react
 ```
@@ -453,18 +477,21 @@ npm install --save-dev vitest @testing-library/react
 ### Deployment
 
 #### Vercel
+
 ```bash
 npm install -g vercel
 vercel
 ```
 
 #### Netlify
+
 ```bash
 npm install -g netlify-cli
 netlify deploy
 ```
 
 #### GitHub Pages
+
 1. Build project: `npm run build`
 2. Deploy folder `dist/` ke GitHub Pages
 
@@ -499,6 +526,7 @@ A: Fitur export belum tersedia, namun data tersimpan di IndexedDB browser yang b
 ## Changelog
 
 ### Version 0.0.0 (Initial Release)
+
 - ✅ Dashboard keuangan
 - ✅ Manajemen transaksi (CRUD)
 - ✅ AI-powered features (categorize, parse, audit, predict, plan)
@@ -515,4 +543,3 @@ Project ini dibuat untuk keperluan edukasi dan tugas sistem cerdas.
 ---
 
 **Dibuat dengan ❤️ menggunakan React dan AI**
-
